@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClimaTempo.Views.PrevisaoView"
+             Title="PrevisaoView">
+    <ScrollView HorizontalOptions="Center">
+        <VerticalStackLayout Spacing="10" Margin="50" HorizontalOptions="Center">
+            <Label
+                HorizontalOptions="Center"
+                Text="Buscar Cidades"/>
+            <Label
+                HorizontalOptions="Center"
+                Text="Digite o nome da Cidade"
+                Margin="0,0,30,0"/>
+            
+            <Entry
+                Placeholder="Digite a cidade"
+                Text="{Binding Cidade_pesquisada}"/>
+            <Button
+                Command="{Binding BuscarCidadesCommand}"
+                Text="Pesquisar"/>
+
+            <VerticalStackLayout HorizontalOptions="Center" IsVisible="{Binding IsPrevisaoVisible}">
+                <Label
+                    Text="Clima"
+                    HorizontalOptions="Center"
+                    FontSize="Medium"/>
+                <HorizontalStackLayout>
+                    <Label
+                        Text="Max"/>
+                    <Label
+                         Text="{Binding Max}"/>
+                        
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label
+                        Text="Min"/>
+                    <Label
+                        Text="{Binding Min}"/>
+
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+            <ScrollView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout 
+                            Padding="0,35,0,0"
+                            HorizontalOptions="Center">
+                            <VerticalStackLayout>
+                                <Label
+                                    Text="{Binding Nome}" HorizontalOptions="Center"/>
+                                <Label
+                                    Text="{Binding Id}" HorizontalOptions="Center"/>
+                                <Label
+                                    Text="{Binding Estado}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Button Command="{Binding Path=BindingContext.BuscarPrevisaoCommand,Source={x:Reference PrevisaoView}}"
+                                        Text="Clima"
+                                        HorizontalOptions="Center"
+                                        MaximumWidthRequest="90"
+                                        CommandParameter="{Binding Id}"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </ScrollView>
+                
+
+        </VerticalStackLayout>
+    </ScrollView>
+    <!--
+    <VerticalStackLayout>
+        <Label 
+            Text="{Binding Cidade}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            
+            Text= "{Binding Max}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            Text= "{Binding Min}" 
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <CollectionView ItemsSource="{Binding proxDiasn}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <Label
+                            Text="{Binding Min}"/>
+                        <Label
+                        Text="{Binding Max}"/>
+                        <Label
+                            Text="{Binding Conndicao}"/>
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+         <Button Command ="{Binding BuscarPrevisaoCommand}" Text="Carregar"/>
+
+
+
+    </VerticalStackLayout>
+    -->
+</ContentPage>
